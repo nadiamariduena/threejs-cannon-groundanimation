@@ -37,7 +37,11 @@ class CannonAndGroundAnima extends Component {
   componentDidMount() {
     this.sceneSetup();
     this.addCustomSceneObjects();
+    // extra test
+    this.updateFunction();
+    //
     this.startAnimationLoop();
+
     //
     window.addEventListener("resize", this.handleWindowResize);
   }
@@ -316,7 +320,14 @@ class CannonAndGroundAnima extends Component {
     });
     //
     //
+    this.sphere_geometry = new THREE.SphereGeometry(2, 128, 128);
+    this.material = new THREE.MeshNormalMaterial();
 
+    this.sphere = new THREE.Mesh(this.sphere_geometry, this.material);
+    this.sphere.position.x = -5; //left - right - horizontal
+    this.sphere.position.y = 10; //top - bottom - vertical
+    this.sphere.position.z = -20; // diagonal
+    this.scene.add(this.sphere);
     //
     //
     //-----------------
@@ -394,21 +405,21 @@ class CannonAndGroundAnima extends Component {
     this.scene.add(this.spotLight);
     // //
     //
-    //
-    //
-    //
-    //
-    //
-    //--------------------------
-    //          STATS
-    //
-    // this.stats = Stats();
-    // document.body.appendChild(this.stats.dom);
-    //
-    //
-    //
   };
   //
+  //
+  //
+  updateFunction = () => {
+    // change '0.003' for more aggressive animation
+    this.timeGround = performance.now() * 0.003;
+    //go through vertices here and reposition them
+
+    // change 'k' value for more spikes
+    var spikes = 3;
+    // for (var i = 0; i < sphere.geometry.vertices.length; i++) {
+    //     var p = sphere.geometry.vertices[i];
+    //     p.normalize().multiplyScalar(1 + 0.3 * noise.perlin3(p.x * spikes + this.timeGround, p.y * spikes, p.z * spikes));
+  };
   //
   //
 
