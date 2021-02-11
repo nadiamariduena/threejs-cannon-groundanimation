@@ -2,6 +2,8 @@
 
 # TESTING DIFFERENT STUFF
 
+[<img src="./src/img/forms.gif"/>](https://youtu.be/veT2R19p90k)
+
 ### I will try to add a ground animation using Math.sin and then see if I can add multiple models from a single blender model using cannon.
 
 <br>
@@ -182,8 +184,246 @@ this.cube.geometry.verticesNeedUpdate = true;
 this.animationSpeed = performance.now() * 0.001;
 ```
 
-#### PLAYING AROUND
+<br>
+<br>
+
+#### the code for the wireframed Blob
+
+```javascript
+addCustomSceneObjects = () => {
+  // INIT Perlin:
+  this.noise = new Perlin();
+  // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
+  //
+  const loader = new THREE.TextureLoader();
+  //
+  //
+  // THREE.PlaneGeometry(5, 3); the 5 stands for width and 3 for height
+  //const geometry = new THREE.PlaneGeometry(5, 2.5, 20, 15);
+  this.geometry = new THREE.SphereGeometry(50, 50, 50, 50);
+  // it will increase the segments in the geometry
+  // its related to this   const waveX1 = 0.1 * Math.sin(dots_vertices.x * 2 + t_timeClock);
+  //
+  //
+  this.material = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    wireframe: true,
+    // map: loader.load("/img/NataliaSamoilova_metalmagazine-10.jpg"),
+  });
+
+  //
+  this.cube = new THREE.Mesh(this.geometry, this.material);
+  this.scene.add(this.cube);
+  //
+  //
+  // new rotation
+  this.cube.rotation.set(-0.1, 0, 0);
+  // x direction y direction and z
+  // this.clock = new THREE.Clock();
+
+  //
+};
+/*
+ 
+                4
+ 
+ 
+ */
+
+startAnimationLoop = () => {
+  // the original animation
+  //codepen.io/farisk/pen/vrbzwL?editors=0010
+  // change '0.003' for more aggressive animation
+  // 01 is very slow, 03 faster, 05 extremely faster
+  this.animationSpeed = performance.now() * 0.001;
+  //
+  //--------------------------------
+  //      The waves
+  // -------------------------------
+  //
+  var spikes = 2;
+  for (
+    var eachVertice = 0;
+    eachVertice < this.cube.geometry.vertices.length;
+    eachVertice++
+  ) {
+    var p = this.cube.geometry.vertices[eachVertice];
+    p.normalize().multiplyScalar(
+      1 +
+        0.3 *
+          this.noise.perlin3(
+            p.x * spikes + this.animationSpeed,
+            p.y * spikes,
+            p.z * spikes
+          )
+    );
+  }
+  // noise related you can also use Math.sin instead of the noise but its different
+  // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
+  this.cube.geometry.computeVertexNormals();
+  this.cube.geometry.normalsNeedUpdate = true;
+  this.cube.geometry.verticesNeedUpdate = true;
+  //
+  //
+
+  this.renderer.render(this.scene, this.camera);
+  this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+};
+```
+
+<br>
+
+# 👾
+
+### The code:
+
+[CHECK OUT the entire code](src/docs/BLOB_option.md)
+
+<br>
+<hr>
+<br>
+<br>
+<br>
+
+### PLAYING AROUND
 
 [<img src="./src/img/options.gif"/>]()
 
 [<img src="./src/img/options_img-material.gif"/>]()
+
+<br>
+<br>
+
+## CONCLUSION
+
+- IF I WANTED to add an **atypic pond** to a future scene, I can just use for now one of these options below, of course I can also make it in Blender but it s nice to have more options.
+
+<br>
+<br>
+<br>
+
+#### THE CODE for the flat animation with vertices noise on the borders
+
+```javascript
+  addCustomSceneObjects = () => {
+    // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
+    this.noise = new Perlin();
+    //
+    //
+    const loader = new THREE.TextureLoader();
+    //
+    //
+    // THREE.PlaneGeometry(5, 3); the 5 stands for width and 3 for height
+    //const geometry = new THREE.PlaneGeometry(5, 2.5, 20, 15);
+    this.geometry = new THREE.PlaneGeometry(50, 50, 50, 50);
+    // it will increase the segments in the geometry
+    // its related to this   const waveX1 = 0.1 * Math.sin(dots_vertices.x * 2 + t_timeClock);
+    //
+    //
+    this.material = new THREE.MeshBasicMaterial({
+      // color: 0xdddddd,
+      // wireframe: true,
+      map: loader.load("/img/NataliaSamoilova_metalmagazine-10.jpg"),
+    });
+
+    //
+    this.cube = new THREE.Mesh(this.geometry, this.material);
+    this.scene.add(this.cube);
+    //
+    //
+    // new rotation
+    this.cube.rotation.set(-0.1, 0, 0);
+    // x direction y direction and z
+
+  };
+
+
+  startAnimationLoop = () => {
+    // the original animation
+    //codepen.io/farisk/pen/vrbzwL?editors=0010
+    // change '0.003' for more aggressive animation
+    // 01 is very slow, 03 faster, 05 extremely faster
+    this.animationSpeed = performance.now() * 0.001;
+
+    //--------------------------------
+    //      The waves
+    // -------------------------------
+    //
+    var spikes = 2;
+    for (
+      var eachVertice = 0;
+      eachVertice < this.cube.geometry.vertices.length;
+      eachVertice++
+    ) {
+      var p = this.cube.geometry.vertices[eachVertice];
+      p.normalize().multiplyScalar(
+        1 +
+          0.3 *
+            this.noise.perlin3(
+              p.x * spikes + this.animationSpeed,
+              p.y * spikes,
+              p.z * spikes
+            )
+      );
+    }
+    // noise related you can also use Math.sin instead of the noise but its different
+    // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
+    this.cube.geometry.computeVertexNormals();
+    this.cube.geometry.normalsNeedUpdate = true;
+    this.cube.geometry.verticesNeedUpdate = true;
+```
+
+<br>
+
+### The flat sphere with waves
+
+[<img src="./src/img/wavy-ground.gif"/>](https://youtu.be/ZaIXObnzb5o)
+
+```javascript
+
+    this.clock = new THREE.Clock();
+
+    //
+  };
+  /*
+
+                4
+
+
+ */
+
+  startAnimationLoop = () => {
+    const t_timeClock = this.clock.getElapsedTime();
+    //
+    // With the vertices we are going to grab all the points /vertices withing the cube/flag
+    //
+    //
+    this.cube.geometry.vertices.map((dots_vertices) => {
+      const waveX1 = 0.5 * Math.sin(dots_vertices.x * 2 + t_timeClock);
+      // second wave
+      const waveX2 = 0.25 * Math.sin(dots_vertices.x * 3 + t_timeClock * 2);
+      // 3 wave but in the Y direction
+      const waveY1 = 0.1 * Math.sin(dots_vertices.y * 5 + t_timeClock * 0.5); //to slowdown the time t_timeClock * 0.5);
+      //
+      //
+      dots_vertices.z = waveX1 + waveX2 + waveY1;
+    });
+
+    //
+    // // its going to wave the flag smoothly
+    this.cube.geometry.verticesNeedUpdate = true;
+    //
+
+    this.renderer.render(this.scene, this.camera);
+
+    this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
+  };
+```
+
+# 👾
+
+### The code:
+
+[CHECK OUT the entire code](src/docs/WAVYGROUND.md)
+
+[<img src="./src/img/circle-vertices.jpg"/>]()

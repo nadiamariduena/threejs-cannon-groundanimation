@@ -1,3 +1,4 @@
+```javascript
 import React, { Component } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -26,10 +27,10 @@ class App extends Component {
     window.addEventListener("resize", this.handleWindowResize);
   }
   /*
-
+ 
                 9
-
-
+ 
+ 
  */
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowResize);
@@ -37,10 +38,10 @@ class App extends Component {
     this.controls.dispose();
   }
   /*
-
+ 
                 2
-
-
+ 
+ 
  */
   // Standard scene setup in Three.js. Check "Creating a scene" manual for more information
   // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
@@ -63,8 +64,11 @@ class App extends Component {
     //
     // 6  ******
     //
-    this.camera.position.z = 2.6; // is used here to set some distance from a cube that is located at z = 0
-    // OrbitControls allow a camera to orbit around the object
+    this.camera.position.x = 0;
+    this.camera.position.y = 5;
+    this.camera.position.z = 10; // origin: 50
+    // this.camera.position.z = 2.6; // is used here to set some distance from a cube that is located at z = 0
+    // // OrbitControls allow a camera to orbit around the object
     // https://threejs.org/docs/#examples/controls/OrbitControls
     this.controls = new OrbitControls(this.camera, this.el);
     //
@@ -81,10 +85,10 @@ class App extends Component {
     this.el.appendChild(this.renderer.domElement); // mount using React ref
   };
   /*
-
+ 
                 3
-
-
+ 
+ 
  */
 
   addCustomSceneObjects = () => {
@@ -97,7 +101,7 @@ class App extends Component {
     //
     // THREE.PlaneGeometry(5, 3); the 5 stands for width and 3 for height
     //const geometry = new THREE.PlaneGeometry(5, 2.5, 20, 15);
-    this.geometry = new THREE.SphereGeometry(50, 50, 50, 50);
+    this.geometry = new THREE.SphereGeometry(20, 20, 20);
     // it will increase the segments in the geometry
     // its related to this   const waveX1 = 0.1 * Math.sin(dots_vertices.x * 2 + t_timeClock);
     //
@@ -114,61 +118,44 @@ class App extends Component {
     //
     //
     // new rotation
-    this.cube.rotation.set(-0.1, 0, 0);
+    this.cube.rotation.x = -0.5 * Math.PI;
     // x direction y direction and z
     //
 
     //
     //
 
-    // this.clock = new THREE.Clock();
+    this.clock = new THREE.Clock();
 
     //
   };
   /*
-
+ 
                 4
-
-
+ 
+ 
  */
 
   startAnimationLoop = () => {
-    // the original animation
-    //codepen.io/farisk/pen/vrbzwL?editors=0010
-    // change '0.003' for more aggressive animation
-    // 01 is very slow, 03 faster, 05 extremely faster
-    this.animationSpeed = performance.now() * 0.001;
+    const t_timeClock = this.clock.getElapsedTime();
+    //
+    // With the vertices we are going to grab all the points /vertices withing the cube/flag
     //
     //
+    this.cube.geometry.vertices.map((dots_vertices) => {
+      const waveX1 = 0.5 * Math.sin(dots_vertices.x * 2 + t_timeClock);
+      // second wave
+      const waveX2 = 0.25 * Math.sin(dots_vertices.x * 3 + t_timeClock * 2);
+      // 3 wave but in the Y direction
+      const waveY1 = 0.1 * Math.sin(dots_vertices.y * 5 + t_timeClock * 0.5); //to slowdown the time t_timeClock * 0.5);
+      //
+      //
+      dots_vertices.z = waveX1 + waveX2 + waveY1;
+    });
 
     //
-    //--------------------------------
-    //      The waves
-    // -------------------------------
-    //
-    var spikes = 2;
-    for (
-      var eachVertice = 0;
-      eachVertice < this.cube.geometry.vertices.length;
-      eachVertice++
-    ) {
-      var p = this.cube.geometry.vertices[eachVertice];
-      p.normalize().multiplyScalar(
-        1 +
-          0.3 *
-            this.noise.perlin3(
-              p.x * spikes + this.animationSpeed,
-              p.y * spikes,
-              p.z * spikes
-            )
-      );
-    }
-    // noise related you can also use Math.sin instead of the noise but its different
-    // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
-    this.cube.geometry.computeVertexNormals();
-    this.cube.geometry.normalsNeedUpdate = true;
+    // // its going to wave the flag smoothly
     this.cube.geometry.verticesNeedUpdate = true;
-    //
     //
 
     this.renderer.render(this.scene, this.camera);
@@ -176,10 +163,10 @@ class App extends Component {
     this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
   };
   /*
-
+ 
                 8
-
-
+ 
+ 
  */
   handleWindowResize = () => {
     const width = this.el.clientWidth;
@@ -212,3 +199,4 @@ class App extends Component {
 
 //
 export default App;
+```
