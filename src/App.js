@@ -105,18 +105,7 @@ class App extends Component {
     this.noise = new Perlin();
     //
     //
-    // const loader = new THREE.TextureLoader();
-    //
-    //
-    // var sphere_geometry = new THREE.SphereGeometry(1, 128, 128);
-    // var material = new THREE.MeshNormalMaterial();
-
-    // var sphere = new THREE.Mesh(sphere_geometry, material);
-    // this.scene.add(sphere);
-
-    //
-    //
-    //
+    const loader = new THREE.TextureLoader();
     //
     //
     // THREE.PlaneGeometry(5, 3); the 5 stands for width and 3 for height
@@ -126,9 +115,10 @@ class App extends Component {
     // its related to this   const waveX1 = 0.1 * Math.sin(dots_vertices.x * 2 + t_timeClock);
     //
     //
-    this.material = new THREE.MeshLambertMaterial({
-      color: 0xdddddd,
+    this.material = new THREE.MeshBasicMaterial({
+      color: 0x000000,
       wireframe: true,
+      // map: loader.load("/img/NataliaSamoilova_metalmagazine-10.jpg"),
     });
 
     //
@@ -140,12 +130,10 @@ class App extends Component {
     this.cube.rotation.set(-0.1, 0, 0);
     // x direction y direction and z
     //
-    // this will inclassName="flagTwo" actually is like zooming, the less the bigger
-    this.camera.position.z = 5;
+
     //
     //
-    //by default its not doing anything, however inside the animate function you will be using it
-    // its going tclassName="flagTwo"smoothly
+
     // this.clock = new THREE.Clock();
 
     //
@@ -193,13 +181,6 @@ class App extends Component {
     this.cube.geometry.computeVertexNormals();
     this.cube.geometry.normalsNeedUpdate = true;
     this.cube.geometry.verticesNeedUpdate = true;
-    //
-    //
-    //
-    //
-    //
-    this.cube.geometry.verticesNeedUpdate = true;
-    //
     //
     //
 
