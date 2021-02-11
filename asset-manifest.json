@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/threejs-cannon-groundanimation/static/css/main.5c4fd5d2.chunk.css",
+    "main.js": "/threejs-cannon-groundanimation/static/js/main.ec7bb24f.chunk.js",
+    "main.js.map": "/threejs-cannon-groundanimation/static/js/main.ec7bb24f.chunk.js.map",
+    "runtime-main.js": "/threejs-cannon-groundanimation/static/js/runtime-main.f2ae6675.js",
+    "runtime-main.js.map": "/threejs-cannon-groundanimation/static/js/runtime-main.f2ae6675.js.map",
+    "static/js/2.0e8aa2da.chunk.js": "/threejs-cannon-groundanimation/static/js/2.0e8aa2da.chunk.js",
+    "static/js/2.0e8aa2da.chunk.js.map": "/threejs-cannon-groundanimation/static/js/2.0e8aa2da.chunk.js.map",
+    "index.html": "/threejs-cannon-groundanimation/index.html",
+    "static/css/main.5c4fd5d2.chunk.css.map": "/threejs-cannon-groundanimation/static/css/main.5c4fd5d2.chunk.css.map",
+    "static/js/2.0e8aa2da.chunk.js.LICENSE.txt": "/threejs-cannon-groundanimation/static/js/2.0e8aa2da.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f2ae6675.js",
+    "static/js/2.0e8aa2da.chunk.js",
+    "static/css/main.5c4fd5d2.chunk.css",
+    "static/js/main.ec7bb24f.chunk.js"
+  ]
+}
