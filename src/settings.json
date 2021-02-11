@@ -1,0 +1,26 @@
+{
+  "editor.fontSize": 18, //sets the font size of the editor
+  "inlinePreview.disabled": false,
+  /*
+  Disables the inline-preview, this is useful if you are working
+  on something resource-intensive, but runtime errors will no longer
+  be reported.
+    */
+  "javascript.eslint.disabled": true
+  /*
+    disabled eslint. This is useful if you are working
+    with large js files, but errors and warnings will no 
+    longer be reported.
+    */
+}
+
+//  WHY DO YOU USE THIS here ????
+
+/*
+
+ESLint is a tool for identifying and reporting on patterns
+ found in ECMAScript/JavaScript code. In many ways, 
+it is similar to JSLint and JSHint with a few exceptions:
+
+https://github.com/eslint/eslint
+*/

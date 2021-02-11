@@ -10,8 +10,9 @@ AFTER HOURS OF SEARCHING THE REASON FOR THE GEOMETRY OR VERTICES UNDEFINED
 
 
 */
-
 import React, { Component } from "react";
+import reactDom from "react-dom";
+
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
@@ -235,3 +236,32 @@ class App extends Component {
 
 //
 export default App;
+
+/*
+
+body {
+  overflow: hidden;
+  background-color: lemonchiffon;
+
+  .wrapper-flagZoomBox {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flagZoomBox {
+    width: 90%;
+    margin: 0 5%;
+    background: transparent;
+    text-align: center;
+    max-width: 900px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 2px solid #000;
+  }
+}
+
+*/
