@@ -430,4 +430,4 @@ startAnimationLoop = () => {
 
 <!-- [<img src="./src/img/circle-vertices.jpg"/>]() -->
 
-[<img src="./src/img/circle-vertices.jpg"/>]()
+[<img src="./src/img/circle-vertices.jpg"/>](https://youtu.be/ZaIXObnzb5o)
