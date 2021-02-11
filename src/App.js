@@ -105,7 +105,7 @@ class App extends Component {
     this.noise = new Perlin();
     //
     //
-    const loader = new THREE.TextureLoader();
+    // const loader = new THREE.TextureLoader();
     //
     //
     // var sphere_geometry = new THREE.SphereGeometry(1, 128, 128);
@@ -121,15 +121,16 @@ class App extends Component {
     //
     // THREE.PlaneGeometry(5, 3); the 5 stands for width and 3 for height
     //const geometry = new THREE.PlaneGeometry(5, 2.5, 20, 15);
-    this.geometry = new THREE.SphereGeometry(1, 128, 128);
+    this.geometry = new THREE.SphereGeometry(50, 50, 50, 50);
     // it will increase the segments in the geometry
     // its related to this   const waveX1 = 0.1 * Math.sin(dots_vertices.x * 2 + t_timeClock);
     //
     //
-    this.material = new THREE.MeshBasicMaterial({
-      // color: 0x00ff00,
-      map: loader.load("/img/NataliaSamoilova_metalmagazine-10.jpg"),
+    this.material = new THREE.MeshLambertMaterial({
+      color: 0xdddddd,
+      wireframe: true,
     });
+
     //
     this.cube = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.cube);
@@ -157,9 +158,11 @@ class App extends Component {
  */
 
   startAnimationLoop = () => {
-    // in the old flag  :   const t_timeClock = this.clock.getElapsedTime();
-    // in this version i only have to use "this.t_timeClock"
-    this.t_timeClock = performance.now() * 0.003;
+    // the original animation
+    //codepen.io/farisk/pen/vrbzwL?editors=0010
+    // change '0.003' for more aggressive animation
+    // 01 is very slow, 03 faster, 05 extremely faster
+    this.animationSpeed = performance.now() * 0.001;
     //
     //
 
@@ -168,15 +171,24 @@ class App extends Component {
     //      The waves
     // -------------------------------
     //
-    var k = 3;
-    for (var i = 0; i < this.cube.geometry.vertices.length; i++) {
-      var p = this.cube.geometry.vertices[i];
+    var spikes = 2;
+    for (
+      var eachVertice = 0;
+      eachVertice < this.cube.geometry.vertices.length;
+      eachVertice++
+    ) {
+      var p = this.cube.geometry.vertices[eachVertice];
       p.normalize().multiplyScalar(
         1 +
-          0.3 * this.noise.perlin3(p.x * k + this.t_timeClock, p.y * k, p.z * k)
+          0.3 *
+            this.noise.perlin3(
+              p.x * spikes + this.animationSpeed,
+              p.y * spikes,
+              p.z * spikes
+            )
       );
     }
-    // noise related
+    // noise related you can also use Math.sin instead of the noise but its different
     // https://rexrainbow.github.io/phaser3-rex-notes/docs/site/perlin/
     this.cube.geometry.computeVertexNormals();
     this.cube.geometry.normalsNeedUpdate = true;
