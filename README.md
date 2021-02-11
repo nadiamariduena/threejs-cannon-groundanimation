@@ -2,7 +2,9 @@
 
 # TESTING DIFFERENT STUFF
 
-[<img src="./src/img/forms.gif"/>](https://youtu.be/veT2R19p90k)
+<!-- [<img src="./src/img/forms.gif"/>](https://youtu.be/veT2R19p90k) -->
+
+[<img src="./src/img/forms.gif"/>]()
 
 ### I will try to add a ground animation using Math.sin and then see if I can add multiple models from a single blender model using cannon.
 
@@ -425,5 +427,7 @@ startAnimationLoop = () => {
 ### The code:
 
 [CHECK OUT the entire code](src/docs/WAVYGROUND.md)
+
+<!-- [<img src="./src/img/circle-vertices.jpg"/>]() -->
 
 [<img src="./src/img/circle-vertices.jpg"/>]()
