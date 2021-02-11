@@ -185,3 +185,5 @@ this.animationSpeed = performance.now() * 0.001;
 #### PLAYING AROUND
 
 [<img src="./src/img/options.gif"/>]()
+
+[<img src="./src/img/options_img-material.gif"/>]()
