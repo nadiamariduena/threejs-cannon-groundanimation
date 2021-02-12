@@ -32,6 +32,33 @@
 - Vertices undefined
   <br>
 
+  ### 🔴 (update)
+
+- THE ERROR reason was the three version, I typed npm three and i got this one: "three": "^0.125.2", but if I used the following: "three": "^0.123.0" it works perfectly.
+
+  ```javascript
+  //this version:
+       "three": "^0.123.0",
+       //is the one that will allow you to make this function work:
+
+       for (
+      var eachVertice = 0;
+      eachVertice < this.cube.geometry.vertices.length;
+      eachVertice++
+    ) {
+      var p = this.cube.geometry.vertices[eachVertice];
+      p.normalize().multiplyScalar(
+        1 +
+          0.3 *
+            this.noise.perlin3(
+              p.x * spikes + this.animationSpeed,
+              p.y * spikes,
+              p.z * spikes
+            )
+      );
+    }
+  ```
+
 ### Due to the issues I encountered 🌵
 
 - It came to my mind that maybe the code of the flag [FLAG project](https://github.com/nadiamariduena/3dflag-threejs-react) could make the job. **When checking the flag code I realize** that I didnt need the whole code but just the **Math.sin**, but of course it gave me an other outcome :), you will it see later.
@@ -431,3 +458,8 @@ startAnimationLoop = () => {
 <!-- [<img src="./src/img/circle-vertices.jpg"/>]() -->
 
 [<img src="./src/img/circle-vertices.jpg"/>](https://youtu.be/ZaIXObnzb5o)
+
+<br>
+<br>
+
+### TO CONTINUE
